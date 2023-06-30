@@ -28,12 +28,13 @@ bool entree_client(int *mem, int semid) {
   /* Reste-t-il des places libres ? */
   if (*mem == 0) {
     /* No more */
-    printf("Dans la shm il y a %d places\n", *mem);
+    place_attribuee = false;
+    printf("PLUS DE PLACES ! Fermetture de la caisse\n", *mem);
   }
   else {
     /* On écrit dans la shm */
     *mem=(*mem - 1);
-    printf("Dans la shm il y a %d places\n", *mem);
+    printf("Il reste %d places pour la séance\n", *mem);
     place_attribuee=true;
   }
 
@@ -68,9 +69,14 @@ int main(int argc, char *argv[]) {
   while (1) {
     attente_aleatoire(delais);
     printf("Un client se présente\n");
-    while (entree_client(mem, semid) == false) {
-      sleep(1);  
+    if(entree_client(mem, semid) == false){
+      printf("PLUS DE PLACES !")
+      break;
     }
+    /* while (entree_client(mem, semid) == false) {
+      sleep(1);  
+      printf("PLUS DE PLACES !")
+    } */
   }
 
   return(0);
