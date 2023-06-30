@@ -73,73 +73,39 @@ printf("DEBUg : parking : shmid=%d\n", shmid);
     mem=attacher_segment_memoire(mem, &shmid);
 
     /* Pas besoin de sémaphore on est seul :-) */
-    *mem=nombre_places_parking;
-
-
+    *mem=nombre_place_of_film;
 
     /* Conversion des shmid et semid  (int) en chaine pour appel programme externe */
     sprintf(shmid_str, "%d", shmid);
     sprintf(semid_str, "%d", semid);
 
-    /* création du fils entrée */
-    pid_entree = fork();
-
-    if (pid_entree == -1) {
-        /* Erreur */
-        perror("pb fork sur création entrée");
-        return(1);
-    }
-
-    if (pid_entree == 0) {
-        /*
-        printf("Je suis le fils entree, je vais faire execl dans 10s shmid_str=%s, semid_str=%s\n", shmid_str, semid_str);
-        */
-        execl("entree", "entree", shmid_str, semid_str, NULL);
-    }
-
-    if (pid_entree >0) {
-        /* processus père */
-
-        /* création du fils sortie */
-        pid_sortie = fork();
-
-        if (pid_sortie == -1) {
-            /* Erreur */
-            perror("pb fork sur création sortie");
-            return(1);
-        }
-
-        if (pid_sortie == 0) {
-             execl("sortie", "sortie", shmid_str, semid_str, nombre_places_parking_str, NULL);
-        }
-
-        /* processus père */
-
-        printf("Père, on attend 1000s \n");
-        sleep(1000);
-/*
-        waitpid(pid_entree, &code_retour_fin_entree, 0);
-
-        waitpid(pid_sortie, &code_retour_fin_sortie, 0);
-*/
-        printf("P: processus père fin\n");
-        return(0);
-    }
+    generate_x_caisses(nombre_place_of_film);
 }
 
 
 void generate_x_caisses(int nombre_caisse){
     int count;
-    pid_t pid_caisse; /* no du processus du processus entree  */
+    pid_t pid_caisse; /* no du processus du processus caisse  */
     for(count = 1; count => nombre_caisse; count++){
         pid_caisse = fork();
-        //Processus père
-        if(pid_caisse > 0){
-            continue;
+
+        //Erreur
+        if (pid_caisse == -1){
+            perror("pb fork sur création caisse");
+            return(1);
         }
-        else{
-            break;
+
+        //Processus père
+        else if(pid_caisse == 0){
+            execl("caisse", "caisse", shmid_str, semid_str, NULL);
+        }
+
+        //printf("Je suis le fils caisse, je vais faire execl dans 10s shmid_str=%s, semid_str=%s\n", shmid_str, semid_str);
+        else if(pid_caisse > 0){
+            continue;
         }
     }
     printf("%d caisses crées !", count);
+    return(0);
+
 }

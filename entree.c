@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
 
   while (1) {
     attente_aleatoire(delais);
-    printf("Une voiture se présente\n");
+    printf("Un client se présente\n");
     while (entree_voiture(mem, semid) == false) {
       sleep(1);  
     }
