@@ -14,6 +14,39 @@ extern int V();
 
 extern int creer_segment_memoire();
 
+/******************************************************************************/
+/*
+ * Fonctions 
+*/
+/******************************************************************************/
+int generate_x_caisses(int nombre_caisse, char shmid_str, char semid_str){
+    int count;
+    pid_t pid_caisse; /* no du processus du processus caisse  */
+    for(count = 1; count <= nombre_caisse; count++){
+        pid_caisse = fork();
+
+        //Erreur
+        if (pid_caisse == -1){
+            perror("pb fork sur création caisse");
+            return(1);
+        }
+
+        //Processus père
+        else if(pid_caisse == 0){
+            execl("entree", "entree", shmid_str, semid_str, NULL);
+        }
+
+        //printf("Je suis le fils caisse, je vais faire execl dans 10s shmid_str=%s, semid_str=%s\n", shmid_str, semid_str);
+        else if(pid_caisse > 0){
+            continue;
+        }
+    }
+    printf("%d caisses crées !", count);
+    return(0);
+
+}
+
+
 int main(int argc, char *argv[])
 {
     pid_t pid_entree; /* no du processus du processus entree  */
@@ -79,33 +112,8 @@ printf("DEBUg : parking : shmid=%d\n", shmid);
     sprintf(shmid_str, "%d", shmid);
     sprintf(semid_str, "%d", semid);
 
-    generate_x_caisses(nombre_place_of_film);
+    return generate_x_caisses(nombre_place_of_film, shmid_str, semid_str);
 }
 
 
-void generate_x_caisses(int nombre_caisse){
-    int count;
-    pid_t pid_caisse; /* no du processus du processus caisse  */
-    for(count = 1; count => nombre_caisse; count++){
-        pid_caisse = fork();
 
-        //Erreur
-        if (pid_caisse == -1){
-            perror("pb fork sur création caisse");
-            return(1);
-        }
-
-        //Processus père
-        else if(pid_caisse == 0){
-            execl("caisse", "caisse", shmid_str, semid_str, NULL);
-        }
-
-        //printf("Je suis le fils caisse, je vais faire execl dans 10s shmid_str=%s, semid_str=%s\n", shmid_str, semid_str);
-        else if(pid_caisse > 0){
-            continue;
-        }
-    }
-    printf("%d caisses crées !", count);
-    return(0);
-
-}
