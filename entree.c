@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
     attente_aleatoire(delais);
     printf("Un client se présente\n");
     if(entree_client(mem, semid) == false){
-      printf("PLUS DE PLACES !")
+      printf("PLUS DE PLACES !");
       break;
     }
     /* while (entree_client(mem, semid) == false) {
