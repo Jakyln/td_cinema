@@ -19,7 +19,7 @@ extern int creer_segment_memoire();
  * Fonctions 
 */
 /******************************************************************************/
-int generate_x_caisses(int nombre_caisse, char shmid_str, char semid_str){
+int generate_x_caisses(int nombre_caisse, char * shmid_str, char * semid_str){
     int count;
     pid_t pid_caisse; /* no du processus du processus caisse  */
     for(count = 1; count <= nombre_caisse; count++){
