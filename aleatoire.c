@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <time.h>
 
-#define ATTENTE_MAX 7
+#define ATTENTE_MAX_TRAITEMENT 3
 
 void attente_aleatoire(unsigned int delais) {
 

@@ -19,21 +19,21 @@ extern int V();
 */
 /******************************************************************************/
 
-bool entree_client(int *mem, int semid) {                                       
+bool entree_client(int *mem, int semid, int nb_place_pris) {                                       
   bool place_attribuee=false;
 
   /* On protège l'accès à la shm */
   P(semid);
 
   /* Reste-t-il des places libres ? */
-  if (*mem == 0) {
+  if ( (*mem - nb_place_pris) < 0) {
     /* No more */
     place_attribuee = false;
-    printf("PLUS DE PLACES ! Fermetture de la caisse\n", *mem);
+    printf("Client refusé ! Il ne reste pas assez de places pour la séance.\n", *mem);
   }
   else {
     /* On écrit dans la shm */
-    *mem=(*mem - 1);
+    *mem=(*mem - nb_place_pris);
     printf("Il reste %d places pour la séance\n", *mem);
     place_attribuee=true;
   }
@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
 
   int shmid=atoi(argv[1]);
   int semid=atoi(argv[2]);
-
+  int nb_place_pris;
   int *mem;
 
   /*
@@ -68,10 +68,13 @@ int main(int argc, char *argv[]) {
 
   while (1) {
     attente_aleatoire(delais);
-    printf("Un client se présente\n");
-    if(entree_client(mem, semid) == false){
-      printf("PLUS DE PLACES !");
-      break;
+    nb_place_pris=attribution_nb_aleatoire_places_pris();
+    printf("Un client se présente et désire prendre %d places.\n",nb_place_pris);
+    if(entree_client(mem, semid, nb_place_pris) == false){
+      if(nb_place_pris == 1){
+        printf("Processus terminé");
+        break;
+      }
     }
   }
 
