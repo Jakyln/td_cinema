@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
 
     int nombre_place_of_film;
     int nombre_caisse;
-    char titre_film;
+    char * titre_film;
     
     
     
@@ -126,13 +126,8 @@ printf("DEBUg : parking : shmid=%d\n", shmid);
     sprintf(semid_str, "%d", semid);
 
     generate_x_caisses(nombre_caisse, shmid_str, semid_str);
-    
+
     execl("afficheur_nb_places", "afficheur_nb_places", *mem, 5, NULL);
-
-    while(1){
-        afficheur_nb_places(*mem, 5);
-    }
-
 }
 
 
