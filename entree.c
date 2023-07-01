@@ -22,9 +22,9 @@ extern int V();
 
 bool entree_client(int *mem, int semid, int nb_place_pris) {                                       
   bool place_attribuee=false;
-  printf("Il reste %d places pour la séance\n", *mem);
-  printf("Il reste %d places pour la séance\n", *mem - nb_place_pris);
-  int tmp = *mem - nb_place_pris;
+  printf("Il reste %d places pour la séance\n", mem);
+  printf("Il reste %d places pour la séance\n", mem - nb_place_pris);
+  int tmp = mem - nb_place_pris;
   printf("test : %d\n", tmp);
 
   /* On protège l'accès à la shm */

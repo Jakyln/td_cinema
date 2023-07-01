@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
     printf("-------------------\n");
     printf("-------------------\n");
     printf("-------------------");
-    printf(" FILM : '%d' | NB PLACES : %d ",titre_film,nombre_place_of_film);
+    printf(" FILM : '%s' | NB PLACES : %d ",titre_film,nombre_place_of_film);
     printf("-------------------\n");
     printf("OUVERTURE DES CAISSES\n");  
     printf("-------------------\n");
