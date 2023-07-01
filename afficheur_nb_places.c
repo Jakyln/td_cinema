@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
   int *mem;
 
   while (1) {
-    sleep(5000);
+    sleep(5);
     printf(" %d PLACES RESTANTES.\n",nb_place_pris);
   }
   return(0);
