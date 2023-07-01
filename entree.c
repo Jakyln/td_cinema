@@ -23,12 +23,15 @@ extern int V();
 bool entree_client(int *mem, int semid, int nb_place_pris) {                                       
   bool place_attribuee=false;
   printf("Il reste %d places pour la séance\n", *mem);
+  printf("Il reste %d places pour la séance\n", *mem - nb_place_pris);
+  int tmp = *mem - nb_place_pris;
+  printf("test : %d\n", tmp);
 
   /* On protège l'accès à la shm */
   P(semid);
 
   /* Reste-t-il des places libres ? */
-  if ( (*mem - nb_place_pris) < 0) {
+  if ( (*mem - ,) < 0) {
     /* No more */
     place_attribuee = false;
     printf("Client refusé ! Il ne reste pas assez de places pour la séance.\n", *mem);
