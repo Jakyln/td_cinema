@@ -31,7 +31,7 @@ bool entree_client(int *mem, int semid, int nb_place_pris) {
   P(semid);
 
   /* Reste-t-il des places libres ? */
-  if ( (*mem - ,) < 0) {
+  if ( (*mem - nb_place_pris) < 0) {
     /* No more */
     place_attribuee = false;
     printf("Client refusé ! Il ne reste pas assez de places pour la séance.\n", *mem);
