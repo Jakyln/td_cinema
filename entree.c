@@ -9,6 +9,7 @@
 */
 /******************************************************************************/
 extern void attente_aleatoire();
+extern void attribution_nb_aleatoire_places_pris();
 extern int * attacher_segment_memoire();
 extern int P();
 extern int V();
@@ -68,7 +69,7 @@ int main(int argc, char *argv[]) {
 
   while (1) {
     attente_aleatoire(delais);
-    nb_place_pris=attribution_nb_aleatoire_places_pris();
+    nb_place_pris=attribution_nb_aleatoire_places_pris(7);
     printf("Un client se présente et désire prendre %d places.\n",nb_place_pris);
     if(entree_client(mem, semid, nb_place_pris) == false){
       if(nb_place_pris == 1){

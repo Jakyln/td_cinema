@@ -13,3 +13,10 @@ void attente_aleatoire(unsigned int delais) {
     /* Attente */
     sleep((unsigned int)(random() % ATTENTE_MAX_TRAITEMENT));
 }
+
+void attribution_nb_aleatoire_places_pris(unsigned int max_place_pris) {
+
+    /* Initialisation du désordre */
+    srandom(time(NULL));
+    return rand() % (max + 1);
+}
