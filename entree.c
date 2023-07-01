@@ -69,6 +69,7 @@ int main(int argc, char *argv[]) {
 
   while (1) {
     attente_aleatoire(delais);
+    sleep(2000);
     nb_place_pris=attribution_nb_aleatoire_places_pris(7);
     printf("Un client se présente et désire prendre %d places.\n",nb_place_pris);
     if(entree_client(mem, semid, nb_place_pris) == false){
