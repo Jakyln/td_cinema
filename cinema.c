@@ -41,7 +41,7 @@ int generate_x_caisses(int nombre_caisse, char * shmid_str, char * semid_str){
             continue;
         }
     }
-    printf("%d caisses crées !", count);
+    printf("%d caisses ouvertes !", count);
     return(0);
 
 }
@@ -62,6 +62,7 @@ int main(int argc, char *argv[])
     
     
     
+    char * nombre_caisse_str;
     char * nombre_place_of_film_str;
 
     int shmid; /* Id du segment de mémoire partagé */
@@ -80,10 +81,22 @@ int main(int argc, char *argv[])
     }
 
 
-    nombre_place_of_film_str=argv[1];
+    nombre_caisse_str=argv[1];
+    nombre_place_of_film_str=argv[2];
 
+    titre_film=argv[3];
+
+    nombre_caisse=atoi(nombre_caisse_str);
     nombre_place_of_film=atoi(nombre_place_of_film_str);
 
+    printf("-------------------\n");
+    printf("-------------------\n");
+    printf("-------------------");
+    printf(" FILM : '%d' | NB PLACES : %d");
+    printf("-------------------\n");
+    printf("OUVERTURE DES CAISSES\n");  
+    printf("-------------------\n");
+    printf("-------------------\n");
 
  /* Avant de créer les fils :
     * - on crée le semaphore
@@ -112,7 +125,7 @@ printf("DEBUg : parking : shmid=%d\n", shmid);
     sprintf(shmid_str, "%d", shmid);
     sprintf(semid_str, "%d", semid);
 
-    return generate_x_caisses(nombre_place_of_film, shmid_str, semid_str);
+    return generate_x_caisses(nombre_caisse, shmid_str, semid_str);
 }
 
 

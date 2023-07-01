@@ -73,10 +73,6 @@ int main(int argc, char *argv[]) {
       printf("PLUS DE PLACES !");
       break;
     }
-    /* while (entree_client(mem, semid) == false) {
-      sleep(1);  
-      printf("PLUS DE PLACES !")
-    } */
   }
 
   return(0);
