@@ -9,7 +9,7 @@
 */
 /******************************************************************************/
 extern void attente_aleatoire();
-extern void attribution_nb_aleatoire_places_pris();
+extern int attribution_nb_aleatoire_places_pris();
 extern int * attacher_segment_memoire();
 extern int P();
 extern int V();
