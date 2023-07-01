@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
     printf("Un client se présente et désire prendre %d places.\n",nb_place_pris);
     if(entree_client(mem, semid, nb_place_pris) == false){
       if(nb_place_pris == 1){
-        printf("Processus terminé");
+        printf("Processus terminé\n");
         break;
       }
     }

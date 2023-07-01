@@ -41,7 +41,7 @@ int generate_x_caisses(int nombre_caisse, char * shmid_str, char * semid_str){
             continue;
         }
     }
-    printf("%d caisses ouvertes !", count);
+    printf("%d caisses ouvertes !\n", count);
     return(0);
 
 }
@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
     printf("-------------------\n");
     printf("-------------------\n");
     printf("-------------------");
-    printf(" FILM : '%d' | NB PLACES : %d",titre_film,nombre_place_of_film);
+    printf(" FILM : '%d' | NB PLACES : %d ",titre_film,nombre_place_of_film);
     printf("-------------------\n");
     printf("OUVERTURE DES CAISSES\n");  
     printf("-------------------\n");
