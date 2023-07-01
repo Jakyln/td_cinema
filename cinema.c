@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
 
     char param_gnome_terminal[80];
 
-    if ( argc != 2 ) {
+    if ( argc != 4 ) {
         fprintf(stderr, "Usage : %s nombre_places\n", argv[0]);
         return(3);
     }
