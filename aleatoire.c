@@ -12,5 +12,4 @@ void attente_aleatoire(unsigned int delais) {
 
     /* Attente */
     sleep((unsigned int)(random() % ATTENTE_MAX));
-
 }
