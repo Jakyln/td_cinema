@@ -22,6 +22,7 @@ extern int V();
 
 bool entree_client(int *mem, int semid, int nb_place_pris) {                                       
   bool place_attribuee=false;
+  printf("Il reste %d places pour la séance\n", *mem);
 
   /* On protège l'accès à la shm */
   P(semid);
