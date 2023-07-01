@@ -22,7 +22,7 @@ extern int creer_segment_memoire();
 int generate_x_caisses(int nombre_caisse, char * shmid_str, char * semid_str){
     int count;
     pid_t pid_caisse; /* no du processus du processus caisse  */
-    for(count = 1; count <= nombre_caisse; count++){
+    for(count = 0; count < nombre_caisse; count++){
         pid_caisse = fork();
 
         //Erreur
@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
     printf("-------------------\n");
     printf("-------------------\n");
     printf("-------------------");
-    printf(" FILM : '%d' | NB PLACES : %d");
+    printf(" FILM : '%d' | NB PLACES : %d",titre_film,nombre_place_of_film);
     printf("-------------------\n");
     printf("OUVERTURE DES CAISSES\n");  
     printf("-------------------\n");
@@ -127,7 +127,8 @@ printf("DEBUg : parking : shmid=%d\n", shmid);
 
     generate_x_caisses(nombre_caisse, shmid_str, semid_str);
 
-    execl("afficheur_nb_places", "afficheur_nb_places", *mem, 5, NULL);
+    execl("afficheur_nb_places", "afficheur_nb_places",shmid_str, semid_str, NULL);
+    return 0;
 }
 
 
