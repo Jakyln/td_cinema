@@ -23,7 +23,7 @@ extern int V();
 bool entree_client(int *mem, int semid, int nb_place_pris) {                                       
   bool place_attribuee=false;
   //printf("Il reste %d places pour la séance1\n", *mem);
-  **printf("Il reste %d places pour la séance2\n", *mem - nb_place_pris);
+  /*printf("Il reste %d places pour la séance2\n", *mem - nb_place_pris);
 
 //TODO PROBLEME mem A PAS BONNE VALEUR, TOUJOURS A 0
   /* On protège l'accès à la shm */
