@@ -22,11 +22,10 @@ extern int V();
 
 bool entree_client(int *mem, int semid, int nb_place_pris) {                                       
   bool place_attribuee=false;
-  printf("Il reste %d places pour la séance\n", mem);
-  printf("Il reste %d places pour la séance\n", mem - nb_place_pris);
-  int tmp = mem - nb_place_pris;
-  printf("test : %d\n", tmp);
+  printf("Il reste %d places pour la séance1\n", *mem);
+  printf("Il reste %d places pour la séance2\n", *mem - nb_place_pris);
 
+//TODO PROBLEME mem A PAS BONNE VALEUR, TOUJOURS A 0
   /* On protège l'accès à la shm */
   P(semid);
 
@@ -34,12 +33,12 @@ bool entree_client(int *mem, int semid, int nb_place_pris) {
   if ( (*mem - nb_place_pris) < 0) {
     /* No more */
     place_attribuee = false;
-    printf("Client refusé ! Il ne reste pas assez de places pour la séance.\n", *mem);
+    printf("Client refusé ! Il ne reste pas assez de places pour la séance4.\n", *mem);
   }
   else {
     /* On écrit dans la shm */
     *mem=(*mem - nb_place_pris);
-    printf("Il reste %d places pour la séance\n", *mem);
+    printf("Il reste %d places pour la séance3\n", *mem);
     place_attribuee=true;
   }
 
